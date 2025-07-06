@@ -32,14 +32,14 @@ jobs:
       
       - name: "Put SSH Key in Docker file for Server Access"
         run: |
-          touch mypem.pem
-          echo $SSH_KEY64 | base64 -d > mypem.pem && chmod 400 mypem.pem
+          touch mykey.pem
+          echo $SSH_KEY64 | base64 -d > mykey.pem && chmod 400 mykey.pem
           ssh-keygen -R $SERVER_IP
         env: 
           SSH_KEY64: ${{ secrets.SSH_KEY64 }}
 
       - name: "Docker Pull and Restart Docker"
         run: |
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull yshakya/vcs'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop mysite && docker rm mysite'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name mysite -p 80:80 -d yshakya/vcs'
+          ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker pull yshakya/vcs'
+          ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker stop mysite && docker rm mysite'
+          ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker run --name mysite -p 80:80 -d yshakya/vcs'
