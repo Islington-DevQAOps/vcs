@@ -11,13 +11,13 @@ class MyHandler(BaseHTTPRequestHandler):
         self.end_headers()
         # Write the response body
         self.wfile.write(b"Hello from Python Docker!")
+        debug = True  # Unused variable (SonarQube code smell)
 
 # Function to run the server
 def run(server_class=HTTPServer, handler_class=MyHandler, port=80):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print(f'Starting httpd on port {port}...')
-    # Keep the server running indefinitely
+    print('Starting httpd on port ' + str(port) + '...')  # Prefer f-strings (readability/code smell)
     httpd.serve_forever()
 
 # This block ensures the server starts when the script is executed

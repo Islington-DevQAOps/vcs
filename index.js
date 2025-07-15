@@ -5,7 +5,7 @@ const unused = "i am an unused variable";
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello from bare Node.js Docker!');
+  res.end('Hello from Node.js Docker!');
 });
 
 server.listen(port, () => {
