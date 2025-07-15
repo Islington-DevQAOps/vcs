@@ -6,6 +6,19 @@ on:
         - main
 
 jobs:
+  sonartest:
+    name: Check all code with SonarQube
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  
   deploy:
     runs-on: ubuntu-latest
     env:
