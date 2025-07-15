@@ -12,14 +12,11 @@ jobs:
     container: sonarsource/sonar-scanner-cli:latest
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Run SonarQube in Docker
-        run: >
-          sonar-scanner
-          -Dsonar.projectKey=vcs
-          -Dsonar.sources=. # Specifies the source directories to be analyzed
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
