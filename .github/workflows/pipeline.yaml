@@ -9,12 +9,17 @@ jobs:
   sonartest:
     name: Check all code with SonarQube
     runs-on: ubuntu-latest
+    container: sonarsource/sonar-scanner-cli:latest
     
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: SonarSource/sonarqube-scan-action@v4
+      - name: Run SonarQube in Docker
+        run: >
+          sonar-scanner
+          -Dsonar.projectKey=vcs
+          -Dsonar.sources=. # Specifies the source directories to be analyzed
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
