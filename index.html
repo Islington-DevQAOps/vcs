@@ -1,125 +1,142 @@
-
 <!DOCTYPE html>
-
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <style>
-    *,
-    *:before,
-    *:after {
-      box-sizing: border-box;
-    }
-
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-    }
-
-
-    h2 {
-      font-size: 20px;
-      line-height: 25px;
-    }
-
-    h4 {
-        font-size: 16px;
-        line-height: 21px;
-    }
-
-    .container {
-      max-width: 549px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
-
-    .flex-center {
-      display: flex;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      padding: 0 90px;
-      border-radius: 4px;
-    }
-
-    .email-template-wrapper {
-        height: 100vh;
-
-      padding: 160px 48px;
-      background: #E7E7ED;
-      color: #272833;
-      font-size: 16px;
-      line-height: 21px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    }
-
-    .wrapper {
-      border-radius: 4px;
-      flex: 1;
-      padding: 48px 0;
-      text-align: center;
-      background: #fff;
-    }
-
-    .wrapper .git {
-      padding-bottom: 48px;
-    }
-
-    .wrapper .link {
-      margin: 56px 0;
-    }
-
-    .wrapper .link a {
-      display: inline-block;
-      background-color: #0B5FFF;
-      color: #FFFFFF;
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 4px;
-      height: 40px;
-      width: 197px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .wrapper .logo-footer .copyright {
-      font-size: 12px;
-      letter-spacing: 0;
-      line-height: 15px;
-    }
-
-    .wrapper table {
-      margin: 0 auto;
-    }
-    .wrapper table th,
-    .wrapper table td {
-      padding: 5px 20px;
-    }
-    p {
-      color: #575863;
-      padding-bottom: 8px;
-    }
-   
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCS</title>
+     <link rel="icon" href="https://www.jenkins.io/images/logos/jenkins/jenkins.svg" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #1f2937; /* Dark gray text */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-center mb-12 text-slate-800;
+        }
+        .nav-link {
+            @apply px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200 hover:text-slate-900 transition-colors;
+        }
+        .project-card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300;
+        }
+        .btn {
+            @apply px-6 py-3 rounded-lg font-semibold transition-colors duration-300;
+        }
+        .btn-primary {
+            @apply bg-sky-600 hover:bg-sky-700 text-white;
+        }
+        .btn-secondary {
+            @apply bg-slate-200 hover:bg-slate-300 text-slate-800;
+        }
+        /* Custom scrollbar for better aesthetics (optional) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* slate-300 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; /* slate-500 */
+        }
+    </style>
 </head>
+<body class="antialiased">
 
-<body>
-  <section class="email-template-wrapper">
-    <div class="container">
-      <div class="flex-center">
-        <div class="wrapper">
-          <h2>Welcome to</h2>
-          <h2>Code Management with VCS!</h2>  
-          <div class="vcs">
-            <img src="https://git-scm.com/images/logo@2x.png" alt="git" />
-          </div>
+    <section id="work" class="py-20 bg-slate-50">
+       <div class="container mx-auto px-6">
+        <h1>Welcome to Code Management with VCS!</h1>
+        <h1>------------------------------------</h1>
+        <h2>This site is powered by:</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card **max-w-xs md:max-w-sm lg:max-w-md**">
+                    <a>
+                        <img src="https://git-scm.com/images/logo@2x.png" alt="git" class="w-full h-48 object-contain">
+                    </a>
+                        <div class="p-6 **text-center**">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2 text-center">git</h3>
+                    </div>
+                </div>
+                <div class="project-card **max-w-xs md:max-w-sm lg:max-w-md**">
+                    <a>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png" alt="GitHub" class="w-full h-48 object-contain">
+                    </a>
+                    <div class="p-6 **text-center**">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2 text-center">GitHub</h3>
+                    </div>
+                </div>
+                <div class="project-card **max-w-xs md:max-w-sm lg:max-w-md**">
+                    <a>
+                        <img src="https://logos-world.net/wp-content/uploads/2021/02/Docker-Logo.png" alt="Docker" class="w-full h-48 object-contain">
+                   </a>
+                    <div class="p-6 **text-center**">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2 text-center">Docker</h3>
+                    </div>
+                </div>
+                <div class="project-card **max-w-xs md:max-w-sm lg:max-w-md**">
+                    <a>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="w-full h-48 object-contain">
+                    </a>
+                    <div class="p-6 **text-center**">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2 text-center">AWS</h3>
+                    </div>
+                </div>
+                <div class="project-card **max-w-xs md:max-w-sm lg:max-w-md**">
+                    <a>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" class="w-full h-48 object-contain">
+                    </a>
+                    <div class="p-6 **text-center**">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2 text-center">Linux Operating System</h3>
+                    </div>
+                </div>
+                </div>
         </div>
-      </div>
-  </section>
-</body>
+    </section>
 
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only prevent default if it's an internal link for smooth scrolling
+                if (this.getAttribute('href').startsWith('#') && this.getAttribute('href').length > 1) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
 </html>
