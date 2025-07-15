@@ -1,7 +1,7 @@
 #simple index.html using NGINX
-# FROM nginx:latest
-# COPY index.html /usr/share/nginx/html/index.html
-# EXPOSE 80
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
 
 #nodejs
 # FROM node:18
@@ -11,8 +11,8 @@
 # EXPOSE 80
 
 #python
-FROM python:3.9
-WORKDIR /app
-COPY app.py .
-CMD ["python", "app.py"]
-EXPOSE 80
+# FROM python:3.9
+# WORKDIR /app
+# COPY app.py .
+# CMD ["python", "app.py"]
+# EXPOSE 80
