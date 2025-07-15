@@ -32,6 +32,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_SCANNER_SKIP_JRE: true
         run: |
           sonar-scanner \
             -Dsonar.projectKey=vcs \
