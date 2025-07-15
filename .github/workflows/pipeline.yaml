@@ -23,9 +23,10 @@ jobs:
 
       - name: Install SonarScanner v7.1.0
         run: |
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux.zip
+          curl -sSLo sonar-scanner.zip \
+            https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-x64.zip
           unzip sonar-scanner.zip -d $HOME
-          echo "$HOME/sonar-scanner-7.1.0.4889-linux/bin" >> $GITHUB_PATH
+          echo "$HOME/sonar-scanner-7.1.0.4889-linux-x64/bin" >> $GITHUB_PATH
 
       - name: Run SonarScanner
         env:
