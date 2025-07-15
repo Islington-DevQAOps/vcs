@@ -4,7 +4,7 @@
 # EXPOSE 80
 
 #nodejs
-FROM node:18
+FROM node:20
 WORKDIR /app
 COPY index.js .
 CMD ["node", "index.js"]
