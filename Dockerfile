@@ -1,11 +1,18 @@
 #simple index.html using NGINX
-FROM nginx:latest
+# FROM nginx:latest
 # COPY index.html /usr/share/nginx/html/index.html
-EXPOSE 80
+# EXPOSE 80
 
 #nodejs
-FROM node:lts-alpine
+# FROM node:lts-alpine
+# WORKDIR /app
+# COPY index.js .
+# CMD ["node", "index.js"]
+# EXPOSE 3000
+
+#python
+FROM python:3.9-slim-buster
 WORKDIR /app
-COPY index.js .
-CMD ["node", "index.js"]
-EXPOSE 3000
+COPY app.py .
+CMD ["python", "app.py"]
+EXPOSE 80
