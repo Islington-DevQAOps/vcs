@@ -1,5 +1,6 @@
-const http = require('http');
+var http = require('http');
 const port = 80;
+const unused = "i am an unused variable";
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
