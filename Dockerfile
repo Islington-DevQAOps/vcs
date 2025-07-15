@@ -1,3 +1,4 @@
-FROM nginx:latest
-COPY index.html /usr/share/nginx/html/index.html
+FROM php:latest
+# COPY index.html /usr/share/nginx/html/index.html
+COPY index.php /var/www/html/index.php
 EXPOSE 80
