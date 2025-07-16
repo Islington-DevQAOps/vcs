@@ -1,4 +1,4 @@
-var http = require('http');
+const http = require('http');
 const port = 80;
 const unused = "i am an unused variable";
 
