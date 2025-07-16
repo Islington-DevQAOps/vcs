@@ -1,14 +1,14 @@
 #simple index.html using NGINX
-FROM nginx:latest
-COPY index.html /usr/share/nginx/html/index.html
-EXPOSE 80
+# FROM nginx:latest
+# COPY index.html /usr/share/nginx/html/index.html
+# EXPOSE 80
 
 #nodejs
-# FROM node:18
-# WORKDIR /app
-# COPY index.js .
-# CMD ["node", "index.js"]
-# EXPOSE 80
+FROM node:18
+WORKDIR /app
+COPY index.js .
+CMD ["node", "index.js"]
+EXPOSE 80
 
 #python
 # FROM python:3.9
