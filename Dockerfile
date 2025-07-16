@@ -4,15 +4,15 @@
 # EXPOSE 80
 
 #nodejs
-FROM node:18
-WORKDIR /app
-COPY index.js .
-CMD ["node", "index.js"]
-EXPOSE 80
+# FROM node:18
+# WORKDIR /app
+# COPY index.js .
+# CMD ["node", "index.js"]
+# EXPOSE 80
 
 #python
-# FROM python:3.9
-# WORKDIR /app
-# COPY app.py .
-# CMD ["python", "app.py"]
-# EXPOSE 80
+FROM python:3.9
+WORKDIR /app
+COPY app.py .
+CMD ["python", "app.py"]
+EXPOSE 80
