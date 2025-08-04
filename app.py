@@ -11,7 +11,6 @@ class MyHandler(BaseHTTPRequestHandler):
         self.end_headers()
         # Write the response body
         self.wfile.write(b"Hello from Python Docker!")
-        debug = True  # Unused variable (SonarQube code smell)
 
 # Function to run the server
 def run(server_class=HTTPServer, handler_class=MyHandler, port=80):
