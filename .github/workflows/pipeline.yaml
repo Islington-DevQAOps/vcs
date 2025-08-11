@@ -55,4 +55,4 @@ jobs:
         run: |
           ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker pull yshakya/vcs'
           ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker stop mysite && docker rm mysite'
-          ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker run --name mysite -p 80:80 -d yshakya/vcs'
+          ssh -t ubuntu@$SERVER_IP -i mykey.pem 'docker run --name mysite -p 8000:80 -d yshakya/vcs'
