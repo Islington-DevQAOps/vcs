@@ -1,0 +1,132 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Intentionally insecure CloudFormation for SonarQube / IaC security demo
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+  DBPassword:
+    Type: String
+    Default: MyP@ssw0rd!   # Hardcoded default password (bad)
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: ami-0abcdef1234567890   # Possibly outdated or public AMI
+
+Resources:
+
+  InsecureBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: insecure-public-bucket-example
+      AccessControl: PublicRead   # Public read ACL (bad)
+      VersioningConfiguration:
+        Status: Suspended
+    DeletionPolicy: Delete
+
+  InsecureBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref InsecureBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${InsecureBucket}/*"  # wildcard public access
+
+  InsecureRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: InsecureRoleExample
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: FullAccessPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: "*"
+                Resource: "*"   # Overly permissive IAM policy (Admin everywhere)
+
+  InsecureSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and all egress
+      VpcId: vpc-123456
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0   # SSH open to world
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0   # All TCP open (bad)
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+
+  InsecureInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]  # no AMI validation
+      SecurityGroupIds:
+        - !Ref InsecureSecurityGroup
+      KeyName: insecure-keypair
+      IamInstanceProfile: !Ref InsecureRole
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          echo "DB_PASSWORD=${DBPassword}" >> /etc/myapp/secrets.conf   # plaintext secret in userdata
+          echo "API_KEY=12345-ABCDE-SECRET" >> /etc/myapp/secrets.conf
+          aws s3 cp s3://some-bucket/somefile /tmp/somefile --no-verify-ssl
+
+  InsecureEBS:
+    Type: AWS::EC2::Volume
+    Properties:
+      Size: 8
+      AvailabilityZone: us-east-1a
+      Encrypted: false    # Unencrypted EBS volume (bad)
+      Tags:
+        - Key: Name
+          Value: insecure-volume
+
+  InsecureRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: insecure-rds
+      AllocatedStorage: 20
+      DBInstanceClass: db.t2.micro
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: !Ref DBPassword   # password in plaintext parameter default
+      PubliclyAccessible: true   # Public DB endpoint (bad)
+      StorageEncrypted: false    # Unencrypted DB storage
+
+Outputs:
+  BucketName:
+    Value: !Ref InsecureBucket
+    Export:
+      Name: InsecureBucketName
+"""
+
+if __name__ == "__main__":
+    main()
+2) aws-credentials.json (example showing leaked credentials)
+json
+Copy code
+{
+  "aws_access_key_id": "AKIAEXAMPLEKEY",
+  "aws_secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  "region": "us-east-1"
+}
